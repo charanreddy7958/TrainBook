@@ -6,8 +6,6 @@
 
     <groupId>TrainBook</groupId>
     <artifactId>TrainBook</artifactId>
-
-    <!-- SNAPSHOT so it can be deployed to snapshots repo -->
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -25,7 +23,6 @@
 
         <plugins>
 
-            <!-- Java Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
@@ -35,7 +32,6 @@
                 </configuration>
             </plugin>
 
-            <!-- WAR Build -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
@@ -44,7 +40,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Dependency Download (webapp runner) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -67,18 +62,14 @@
                 </executions>
             </plugin>
 
-            <!-- Snyk Security Scan -->
             <plugin>
                 <groupId>io.snyk</groupId>
                 <artifactId>snyk-maven-plugin</artifactId>
                 <version>2.0.0</version>
                 <inherited>false</inherited>
-                <configuration>
-                    <org>Venn1991</org>
-                </configuration>
             </plugin>
 
-            <!-- Tomcat Deployment Plugin -->
+            <!-- Not used by CI anymore, leave it harmless -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -93,33 +84,6 @@
         </plugins>
     </build>
 
-    <dependencies>
-
-        <!-- Postgres -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.3.7</version>
-        </dependency>
-
-        <!-- MySQL -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
-        </dependency>
-
-        <!-- Servlet API (Provided by Tomcat) -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-    </dependencies>
-
-    <!-- Correct SNAPSHOT Repository -->
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
