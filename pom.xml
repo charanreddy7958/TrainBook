@@ -9,6 +9,24 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <!-- REQUIRED: fixes javax.servlet.* compile errors -->
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Required because webapp-runner comes from Maven Central -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
     <build>
         <sourceDirectory>src</sourceDirectory>
 
@@ -23,6 +41,7 @@
 
         <plugins>
 
+            <!-- JAVA 8 COMPILER -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
@@ -32,6 +51,7 @@
                 </configuration>
             </plugin>
 
+            <!-- WAR CREATION -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
@@ -40,6 +60,7 @@
                 </configuration>
             </plugin>
 
+            <!-- COPY webapp-runner.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -62,6 +83,7 @@
                 </executions>
             </plugin>
 
+            <!-- SNYK -->
             <plugin>
                 <groupId>io.snyk</groupId>
                 <artifactId>snyk-maven-plugin</artifactId>
@@ -69,7 +91,7 @@
                 <inherited>false</inherited>
             </plugin>
 
-            <!-- Not used by CI anymore, leave it harmless -->
+            <!-- Old Tomcat plugin (harmless) -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -84,6 +106,7 @@
         </plugins>
     </build>
 
+    <!-- NEXUS SNAPSHOT UPLOAD -->
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
